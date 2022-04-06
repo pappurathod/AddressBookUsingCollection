@@ -31,6 +31,17 @@ namespace AddressBookUsingCollection
                 }
             }
         }
+        public void ViewPersonByCityOrState(string city, string state)
+        {
+            foreach (var addressBookEntry in addressBookDictionary)
+            {
+                List<Person> PersonInCitiesOrStates = addressBookEntry.Value.addressBook.FindAll(i => (i.city == city) && (i.state == state));
+                foreach (Person person in PersonInCitiesOrStates)
+                {
+                    Console.WriteLine($" {person.city} {person.state} is in {person.city} {person.state}");
+                }
+            }
+        }
     }
 }
 
