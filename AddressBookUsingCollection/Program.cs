@@ -25,7 +25,8 @@ namespace AddressBookUsingCollection
                 Console.WriteLine("6) List of all Address Book");
                 Console.WriteLine("7) Search Person in City or State");
                 Console.WriteLine("8) View Person by City or State");
-                Console.WriteLine("9) Exit");
+                Console.WriteLine("9) Count Contact by city or state");
+                Console.WriteLine("10) Exit");
                 choice = Convert.ToInt32(Console.ReadLine());
                 switch (choice)
                 {
@@ -78,8 +79,15 @@ namespace AddressBookUsingCollection
                         string stateName = Console.ReadLine();
                         addressBookCollection.ViewPersonByCityOrState(cityName, stateName);
                         break;
+                    case 9:
+                        Console.WriteLine("Enter City name");
+                        cityName = Console.ReadLine();
+                        Console.WriteLine("Enter state name");
+                        stateName = Console.ReadLine();
+                        addressBookCollection.ViewCountByCityOrState(cityName, stateName);
+                        break;
                     default:
-                        Console.WriteLine("Thank you!!!!!!!!!");
+                        Console.WriteLine("Thank you.");
                         break;
                 }
             } while (choice != 8);

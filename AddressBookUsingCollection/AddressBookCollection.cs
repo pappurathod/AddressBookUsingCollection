@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -9,6 +10,9 @@ namespace AddressBookUsingCollection
     class AddressBookCollection
     {
         public Dictionary<string, AddressBook> addressBookDictionary;//Dictionary collection
+        public object cityDictionary;
+        public object stateDictionary;
+
         public AddressBookCollection()
         {
             addressBookDictionary = new Dictionary<string, AddressBook>();
@@ -42,6 +46,17 @@ namespace AddressBookUsingCollection
                 }
             }
         }
+        public void ViewCountByCityOrState(string city, string state)
+        {
+            foreach (var addressBookEntry in addressBookDictionary)
+            {
+                List<Person> ViewCountByCityOrState = addressBookEntry.Value.addressBook.FindAll(i => (i.city == city) && (i.state==state));
+                foreach (Person person in ViewCountByCityOrState)
+                {
+                    Console.WriteLine($"Total person in {city} are : " + ViewCountByCityOrState.Count);
+                }
+            }            
+        }           
     }
 }
 
