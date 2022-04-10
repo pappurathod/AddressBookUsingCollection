@@ -10,8 +10,8 @@ namespace AddressBookUsingCollection
     class AddressBookCollection
     {
         public Dictionary<string, AddressBook> addressBookDictionary;//Dictionary collection
-        public object cityDictionary;
-        public object stateDictionary;
+        public Dictionary<string, List<Person>> cityDictionary;
+        public Dictionary<string, List<Person>> stateDictionary;
 
         public AddressBookCollection()
         {
@@ -56,6 +56,41 @@ namespace AddressBookUsingCollection
                     Console.WriteLine($"Total person in {city} are : " + ViewCountByCityOrState.Count);
                 }
             }            
+        }
+        
+        public  void ReadAddressBookFromFile()
+        {
+            string filePath = @"C:\Users\Pappu Rathod\source\repos\AddressBookUsingCollection\Files\Employee.txt";
+            if (File.Exists(filePath))
+            {
+                string output = File.ReadAllText(filePath);
+                Console.WriteLine(output);
+            }
+            else
+                Console.WriteLine("file don't exist");           
+        }
+        public void WriteAddressBookCollectionToFiles()
+        {
+            string folderPath = @"C:\Users\Pappu Rathod\source\repos\AddressBookUsingCollection\Files\";
+            foreach (var AddressBookItem in addressBookDictionary)
+            {
+                string filePath = folderPath + AddressBookItem.Key + ".txt";
+                using (StreamWriter writer = new StreamWriter(filePath))
+                {
+                    foreach (Person person in AddressBookItem.Value.addressBook)
+                    {
+                        writer.WriteLine($"First Name : {person.firstName}");
+                        writer.WriteLine($"Last Name : {person.lastName}");
+                        writer.WriteLine($"Address : {person.address}");
+                        writer.WriteLine($"City : {person.city}");
+                        writer.WriteLine($"State : {person.state}");
+                        writer.WriteLine($"Zip : {person.zip}");
+                        writer.WriteLine($"PhoneNumber : {person.phoneNumber}");
+                        writer.WriteLine($"Email : {person.email}");
+                        writer.WriteLine("------------------------");
+                    }
+                }
+            }
         }
     }
 }

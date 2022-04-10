@@ -1,0 +1,18 @@
+First Name : Swaraj
+Last Name : Rathod
+Address : csn
+City : Nashik
+State : MH
+Zip : 4321
+PhoneNumber : 9876543210
+Email : srathod@gmail.com
+------------------------
+First Name : Vishal
+Last Name : Patil
+Address : KarveNagar
+City : Pune
+State : MH
+Zip : 432002
+PhoneNumber : 8765432109
+Email : vpatil@gmail.com
+------------------------
