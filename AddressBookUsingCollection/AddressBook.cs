@@ -114,6 +114,41 @@ namespace AddressBookUsingCollection
         {
             addressBook.Sort((x, y) => x.firstName.CompareTo(y.firstName));
         }
+        public void SortByCityStateZip()
+        {
+            Console.WriteLine("select sort by");
+            Console.WriteLine("1 for sort by city");
+            Console.WriteLine("2 for sort by state");
+            Console.WriteLine("3 for sort by zip");
+            int ch = int.Parse(Console.ReadLine());
+            switch (ch)
+            {
+                case 1:
+                    SortByCity();
+                    break;
+                case 2:
+                    SortByState();
+                    break;
+                case 3:
+                    SortByZip();
+                    break;
+                default: 
+                    Console.WriteLine("invalid");
+                    break;
+            }
+        }
+        public void SortByCity()
+        {
+            addressBook.Sort((x, y) => x.city.CompareTo(y.city));
+        }
+        public void SortByState()
+        {
+            addressBook.Sort((x,y) => x.state.CompareTo(y.state));
+        }
+        public void SortByZip()
+        {
+            addressBook.Sort((x, y) => x.zip.CompareTo(y.zip));
+        }
     }
 }
 
