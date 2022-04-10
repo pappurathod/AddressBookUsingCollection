@@ -56,7 +56,7 @@ namespace AddressBookUsingCollection
                     Console.WriteLine($"Total person in {city} are : " + ViewCountByCityOrState.Count);
                 }
             }            
-        }           
+        }
     }
 }
 

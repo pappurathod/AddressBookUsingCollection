@@ -110,6 +110,10 @@ namespace AddressBookUsingCollection
             else
                 Console.WriteLine("Entry Not found");
         }
+        public void SortByPersonName()
+        {
+            addressBook.Sort((x, y) => x.firstName.CompareTo(y.firstName));
+        }
     }
 }
 
