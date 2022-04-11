@@ -1,5 +1,5 @@
-﻿//using CsvHelper;
-//using CsvHelper.Configuration;
+﻿using CsvHelper;
+using CsvHelper.Configuration;
 using System.Globalization;
 using System.IO;
 using System;
@@ -92,7 +92,7 @@ namespace AddressBookUsingCollection
                         writer.WriteLine($"Zip : {person.zip}");
                         writer.WriteLine($"PhoneNumber : {person.phoneNumber}");
                         writer.WriteLine($"Email : {person.email}");
-                        writer.WriteLine("------------------------");
+                        
                     }
                 }
             }
@@ -100,23 +100,30 @@ namespace AddressBookUsingCollection
 
         public void WriteAddressBookCollectionToCSVFiles()
         {
-            string filePath = @"C:\Users\Pappu Rathod\source\repos\AddressBookUsingCollection\CSVFiles\data.csv";
-
+            string folderPath = @"C:\Users\Pappu Rathod\source\repos\AddressBookUsingCollection\CSVFiles\";
+            CsvConfiguration configuration = new CsvConfiguration(CultureInfo.InvariantCulture)
+            {
+                IncludePrivateMembers = true,
+            };
             foreach (var AddressBookItem in addressBookDictionary)
             {
-                using (var writer = new StreamWriter(filePath))
-                using (var csvExport = new CsvWriter(writer, CultureInfo.InvariantCulture))
+                string filePath = folderPath + AddressBookItem.Key + ".csv";
+                using (StreamWriter writer = new StreamWriter(filePath))
+                using (var csvExport = new CsvWriter(writer, configuration))
                 {
+                    csvExport.WriteHeader<Person>();
+                    csvExport.NextRecord();
                     foreach (Person person in AddressBookItem.Value.addressBook)
                     {
-                        writer.WriteLine($"First Name : {person.firstName}");
-                        writer.WriteLine($"Last Name : {person.lastName}");
-                        writer.WriteLine($"Address : {person.address}");
-                        writer.WriteLine($"City : {person.city}");
-                        writer.WriteLine($"State : {person.state}");
-                        writer.WriteLine($"Zip : {person.zip}");
-                        writer.WriteLine($"PhoneNumber : {person.phoneNumber}");
-                        writer.WriteLine($"Email : {person.email}");
+                        csvExport.WriteField($"{person.firstName}");
+                        csvExport.WriteField($"{person.lastName}");
+                        csvExport.WriteField($"{person.address}");
+                        csvExport.WriteField($"{person.city}");
+                        csvExport.WriteField($"{person.state}");
+                        csvExport.WriteField($"{person.zip}");
+                        csvExport.WriteField($"{person.phoneNumber}");
+                        csvExport.WriteField($"{person.email}");
+                        csvExport.NextRecord();
                     }
                 }
             }
