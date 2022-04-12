@@ -1,6 +1,4 @@
-﻿using CsvHelper;
-using CsvHelper.Configuration;
-using System.Globalization;
+﻿
 using System.IO;
 using System;
 using System.Collections;
@@ -9,6 +7,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using CsvHelper;
+using Newtonsoft.Json;
+using CsvHelper.Configuration;
+using System.Globalization;
 
 namespace AddressBookUsingCollection
 {
@@ -29,6 +30,9 @@ namespace AddressBookUsingCollection
                 Console.WriteLine(AddressBookItem.Key);
             }
         }
+        /// <summary>
+        /// UC8:
+        /// </summary>
         public void SearchPersonInCityOrState(string firstName, string lastName)
         {
             foreach (var addressBookEntry in addressBookDictionary)
@@ -40,6 +44,9 @@ namespace AddressBookUsingCollection
                 }
             }
         }
+        /// <summary>
+        /// UC9:
+        /// </summary>
         public void ViewPersonByCityOrState(string city, string state)
         {
             foreach (var addressBookEntry in addressBookDictionary)
@@ -51,6 +58,9 @@ namespace AddressBookUsingCollection
                 }
             }
         }
+        /// <summary>
+        /// UC10:
+        /// </summary>
         public void ViewCountByCityOrState(string city, string state)
         {
             foreach (var addressBookEntry in addressBookDictionary)
@@ -62,8 +72,10 @@ namespace AddressBookUsingCollection
                 }
             }            
         }
-        
-        public  void ReadAddressBookFromFile()
+        /// <summary>
+        /// UC13:Ability to Read or Write the Address Book with Persons Contact into a File using File IO
+        /// </summary>
+        public void ReadAddressBookFromFile()
         {
             string filePath = @"C:\Users\Pappu Rathod\source\repos\AddressBookUsingCollection\Files\Employee.txt";
             if (File.Exists(filePath))
@@ -97,7 +109,9 @@ namespace AddressBookUsingCollection
                 }
             }
         }
-
+        /// <summary>
+        /// UC14:Ability to Read/Write the Address Book with Persons Contact as CSV File
+        /// </summary>
         public void WriteAddressBookCollectionToCSVFiles()
         {
             string folderPath = @"C:\Users\Pappu Rathod\source\repos\AddressBookUsingCollection\CSVFiles\";
@@ -136,14 +150,38 @@ namespace AddressBookUsingCollection
             {
                 using (StreamReader streamReader = File.OpenText(presentFiles))
                 {
-                    string lines = "";
+                    string lines ="";
                     while ((lines = streamReader.ReadLine()) != null)
                     {
                         Console.WriteLine(lines);
                     }
                 }
             }        
-        }        
+        }
+        /// <summary>
+        /// UC15:Ability to Read or Write the Address Book with Persons Contact as JSON File
+        /// </summary>
+        public void WriteAddressBookCollectionFromJsonFiles()
+        {
+            string folderPath = @"C:\Users\Pappu Rathod\source\repos\AddressBookUsingCollection\JsonFiles\";
+            foreach (var AddressBookItem in addressBookDictionary)
+            {
+                string filePath = folderPath + AddressBookItem.Key + ".json";
+                JsonSerializer serializer = new JsonSerializer();
+                using (StreamWriter writer = new StreamWriter(filePath))
+                using (JsonWriter jsonWriter = new JsonTextWriter(writer))
+                {
+                    serializer.Serialize(writer, AddressBookItem.Value.addressBook);
+                }
+            }
+        }
+        public void ReadAddressBookCollectionFromJsonFiles()
+        {
+            string folderPath = @"C:\Users\Pappu Rathod\source\repos\AddressBookUsingCollection\JsonFiles\Student.json";
+            string result = File.ReadAllText(folderPath);
+            List<Person> contactDetails = JsonConvert.DeserializeObject<List<Person>>(result);
+            Console.WriteLine("Successfully read records from the file" + contactDetails);
+            //Console.WriteLine(result);
+        }
     }
 }
-

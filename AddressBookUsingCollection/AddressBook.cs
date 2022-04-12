@@ -91,7 +91,9 @@ namespace AddressBookUsingCollection
             else
                 Console.WriteLine("Entry Not found for the name");
         }
-
+        /// <summary>
+        /// UC7:
+        /// </summary>
         public void DeleteContact(string firstName, string lastName)
         {
             int index = 0;
@@ -110,10 +112,16 @@ namespace AddressBookUsingCollection
             else
                 Console.WriteLine("Entry Not found");
         }
+        /// <summary>
+        /// UC11:Ability to sort the entries in the address book alphabetically by Person’s name
+        /// </summary>
         public void SortByPersonName()
         {
             addressBook.Sort((x, y) => x.firstName.CompareTo(y.firstName));
         }
+        /// <summary>
+        /// UC12:Ability to sort the entries in the address book by City, tate, or Zip
+        /// </summary>
         public void SortByCityStateZip()
         {
             Console.WriteLine("select sort by");
